@@ -14,9 +14,18 @@ class App extends React.Component {
       this.setState({
         todos: newToDos
       });
+      
     };
   
-  
+    deleteTodo = (id) => {
+      const filteredTodos = this.state.todos.filter((todo) => {
+        return todo.id !== id;
+      });
+
+      this.setState({
+        todos: filteredTodos
+      });
+    }
 
 
   render() {
@@ -24,13 +33,13 @@ class App extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col">
-          <Form addTodo={this.addTodo}/>
+          <Form addTodo={this.addTodo} />
           </div>
             
         </div>
         <div className="row">
         <div className="col">
-        <ToDoList todos={this.state.todos}/>
+        <ToDoList todos={this.state.todos} deleteTodo={this.deleteTodo}/>
         </div>
             
         </div>    
