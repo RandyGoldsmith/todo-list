@@ -10,8 +10,9 @@ class Form extends React.Component {
         this.props.addTodo({
             id: shortid.generate(),
             text: this.state.term,
-            complete: false
+            isEditing: false
         });
+
         this.setState({
             term: ''
         });

@@ -5,27 +5,49 @@ import ToDoList from './components/ToDoList';
 
 
 class App extends React.Component {
-  state = { todos: [] }
+  state = { 
+    todos: []
+  }
   
     
 
-    addTodo = (todo) => {
+   addTodo = (todo) => {
       const newToDos = [...this.state.todos, todo];
       this.setState({
         todos: newToDos
       });
-      
     };
   
     deleteTodo = (id) => {
-      const filteredTodos = this.state.todos.filter((todo) => {
+      const updatedTodos = this.state.todos.filter((todo) => {
         return todo.id !== id;
       });
 
       this.setState({
-        todos: filteredTodos
+        todos: updatedTodos
       });
     }
+
+    editTodo = (id, newValue) => {
+      const editedTodos = [...this.state.todos].map((todo) => {
+        if(todo.id === id) {
+          todo.isEditing = true;
+          todo.text = newValue;
+          
+        }
+        return todo.text;   
+      });
+      
+      this.setState({
+        todos: [...this.state.todos, editedTodos]
+        
+      });
+      
+     
+    }
+
+    
+
 
 
   render() {
@@ -39,7 +61,11 @@ class App extends React.Component {
         </div>
         <div className="row">
         <div className="col">
-        <ToDoList todos={this.state.todos} deleteTodo={this.deleteTodo}/>
+        <ToDoList 
+          todos={this.state.todos} 
+          deleteTodo={this.deleteTodo} 
+          editTodo={this.editTodo}  
+        />
         </div>
             
         </div>    
